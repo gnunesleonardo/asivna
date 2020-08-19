@@ -28,7 +28,7 @@ $('#send-btn').on('click', async (event) => {
     showLoadingAnimation();
     try {
       for (token of inputTokens) {
-        const expediente = token.value;
+        const expediente = token.value.replace(/[^\w\s]/gi, '');
         const res = await fetch(`${finalEndpoint}/${expediente}`, {
           method: 'GET',
           headers: {
