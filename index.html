@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-tokenfield.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>ASIVNA</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="text-center mt-4 mb-4">
+      <h1>Look at the Sky</h1>
+      <p>I'm still here</p>
+    </div>
+    <!-- Header -->
+
+    <!-- Input -->
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Nº do Expediente</span>
+      </div>
+      <input id="tokenfield" value="2048184195, 1507203207, 1507027201" type="text" class="form-control">
+    </div>
+    <button id="send-btn" class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
+    <!-- Input -->
+
+    <!-- Loading Animation -->
+    <div id='load-spinner' class="mt-4" style="display: none;">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border hide" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!-- Loading Animation -->
+
+    <!-- Table -->
+    <table id="table" class="table table-striped mt-4 mb-4 text-center">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Nº do Expediente</th>
+          <th scope="col">Situação Atual</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <!-- Table -->
+
+    <p class="mt-4 mb-4 text-muted text-center">Feito com &#10084; por Leo</p>
+  </div>
+
+  <script src="js/jquery-3.5.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-tokenfield.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>
