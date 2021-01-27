@@ -2,6 +2,19 @@ const anvisaApi = 'https://consultas.anvisa.gov.br/api/documento/tecnico/expedie
 const hrefExpediente = 'https://consultas.anvisa.gov.br/#/documentos/tecnicos/expediente';
 const corsAnywhereApi = 'https://cors-anywhere.herokuapp.com';
 const mockyApi = 'https://run.mocky.io/v3/cd97bfdd-10bb-42b6-9e3e-4886b7b09623';
+const randomFactApi = 'https://uselessfacts.jsph.pl/random.json?language=en';
+
+const showRandomFact = async () => {
+  try {
+    const response = await fetch (randomFactApi , {
+      method: 'GET'
+    });
+    const randomFact = await response.json();
+    $('#random-fact').text(`Random Fact: ${randomFact.text}`);
+  } catch (error) {
+    console.error('Random Fact Error ->', error);
+  }
+};
 
 const setProgressBarPercentage = (length) => {
   const value = parseInt($('.progress-bar').attr('aria-valuenow'));
@@ -65,7 +78,7 @@ const getAllExpUrls = (expGetArr) => {
         }
       })
       .catch(error => {
-        console.error(error);
+        console.error('Expediente Error ->', error);
         return {
           expediente: exp.expediente,
           response: false
@@ -124,6 +137,7 @@ $('#send-btn').on('click', async (event) => {
     window.alert(`Expediente(s) não encontrados:\n${errorExp}`);
 });
 
-$('document').ready(() => {
+$('document').ready(async () => {
   $('#tokenfield').tokenfield({});
+  showRandomFact();
 });
