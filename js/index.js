@@ -10,9 +10,9 @@ const showRandomFact = async () => {
       method: 'GET'
     });
     const randomFact = await response.json();
-    $('#random-fact').text(`Random Fact: ${randomFact.text}`);
+    $('#random-fact').text(randomFact.text);
   } catch (error) {
-    console.error('Random Fact Error ->', error);
+    return null;
   }
 };
 
@@ -78,7 +78,6 @@ const getAllExpUrls = (expGetArr) => {
         }
       })
       .catch(error => {
-        console.error('Expediente Error ->', error);
         return {
           expediente: exp.expediente,
           response: false
@@ -125,10 +124,18 @@ $('#send-btn').on('click', async (event) => {
 
   clearTableBody();
   successExp.forEach((exp) => {
-    const expediente = exp.peticoes[0].expediente;
-    const situacao = exp.peticoes[0].situacao.descricao;
-    const gerencia = `${exp.peticoes[0].area.sigla} - ${exp.peticoes[0].area.nome}`;
-    const data = moment(exp.peticoes[0].area.recebimento || exp.peticoes[0].area.remessa).format('DD/MM/YYYY');
+    let expediente, situacao, gerencia, data;
+    if (exp.peticoes.length) {
+      expediente = exp.peticoes[0].expediente;
+      situacao = exp.peticoes[0].situacao.descricao;
+      gerencia = `${exp.peticoes[0].area.sigla} - ${exp.peticoes[0].area.nome}`;
+      data = moment(exp.peticoes[0].area.recebimento || exp.peticoes[0].area.remessa).format('DD/MM/YYYY');
+    } else {
+      expediente = exp.processo.peticao.expediente;
+      situacao = exp.processo.peticao.situacao.descricao;
+      gerencia = `${exp.processo.peticao.area.sigla} - ${exp.processo.peticao.area.nome}`;
+      data = moment(exp.processo.peticao.area.recebimento || exp.processo.peticao.area.remessa).format('DD/MM/YYYY');
+    }
     createTableRow(expediente, situacao, gerencia, data);
   });
   changeLoadingAnimationText('Concluído');
